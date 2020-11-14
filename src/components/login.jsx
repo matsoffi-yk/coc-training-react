@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
+import { AppContext } from '../context/AppProvider'
 
 const StyledWrapper = styled.div`
 
@@ -35,30 +36,37 @@ const StyledWrapper = styled.div`
 
 `
 
-const LogIn =()=> {
-    return (
+const LogIn = () => {
+    const { authController } = useContext(AppContext)
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
+    const handleLogin = () => {
+        authController.login(email, password);
+        console.log(email, ":", password);
+    }
+    return (
         <StyledWrapper>
             <div className="container">
                 <div className="text">
-                    <p>Email</p>
-                    <input type="email" className="input"></input>
-                    <p>Password</p>
-                    <input type="password" className="input"></input>
+                    <label>Email</label>
+                    <input type="email" onChange={e => setEmail(e.target.value)} className="input"></input>
+                    <label>Password</label>
+                    <input type="password" onChange={e => setPassword(e.target.value)} className="input"></input>
                     <div className="bnt">
                         <Link to='/home'>
-                             <button type="button" className="button" >Login</button>
-                             
+                            <button type="button" onClick={handleLogin} className="button" >Login</button>
+
                         </Link>
                         <Link to='/register'>
-                             <p>register</p>
+                            <p>register</p>
                         </Link>
                     </div>
-                </div>    
+                </div>
             </div>
-            
+
         </StyledWrapper>
     )
 }
 
-export default  LogIn;
+export default LogIn;
