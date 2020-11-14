@@ -34,17 +34,23 @@ const Topbar = () => {
     return (
         <StyledWrapper>
             <div className="title">
-                <p>Keep it!</p>
+                <Link to='/'>
+                    <p>Keep it!</p>
+                </Link>
             </div>
             <div className="menu">
                 <p>Tanakorn Karode</p>
-                <p>Add Word</p>
-                <p>Quiz</p>
+                <Link to='/add-word'>
+                    <p>Add Word</p>
+                </Link>
+                <Link to='/quiz'>
+                    <p>Quiz</p>
+                </Link>
                 <p>History</p>
             </div>
 
         </StyledWrapper>
-       
+
     )
 }
 

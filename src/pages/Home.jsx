@@ -49,7 +49,6 @@ const Home = () => {
     console.log('dataSource');
     return (
         <StyledWrapper>
-            <Topbar/>
             <div className="title">
                <p >Display Type</p> 
                 <div>
