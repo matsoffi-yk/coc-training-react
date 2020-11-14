@@ -13,11 +13,12 @@ import Register from './pages/Register';
 function App() {
   return (
     <Router>
-      <h3>Topbar</h3>
+      {/* <h3>Topbar</h3> */}
       <Switch>
-        <Route path='/login' component={Login} />
+        <Route path='/home' component={Home} />
         <Route path='/register' component={Register} />
-        <Route path='/' component={Home} />
+        <Route path='/' component={Login} />
+        
       </Switch>
     </Router>
   );
