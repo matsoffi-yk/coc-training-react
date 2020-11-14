@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppProvider'
@@ -40,7 +40,7 @@ const LogIn = () => {
     const { authController } = useContext(AppContext)
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    
+
     const handleLogin = () => {
         authController.login(email, password);
         console.log(email, ":", password);

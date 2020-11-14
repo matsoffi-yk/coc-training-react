@@ -9,7 +9,7 @@ const AuthController = () => {
         auth
             .signInWithEmailAndPassword(email, password)
             .then(response => {
-                console.log(response.user);
+                console.log("user",response.user);
             })
             .catch(error => {
                 console.log(error.message);
