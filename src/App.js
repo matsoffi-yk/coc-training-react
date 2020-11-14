@@ -6,6 +6,7 @@ import {
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Main from './pages/Main';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Switch>
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
-        <Route path='/' component={Main} />
+        <ProtectedRoute path='/' component={Main} />
       </Switch>
     </Router>
   );

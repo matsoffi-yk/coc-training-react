@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components';
+import { AppContext } from '../context/AppProvider';
 
 
 const StyledWrapper = styled.div`
@@ -31,6 +32,24 @@ const StyledWrapper = styled.div`
 
 
 const Topbar = () => {
+
+    const { authController } = useContext(AppContext);
+    const history = useHistory();
+
+    const { user } = authController;
+
+    const firstname = user ? user.firstname : '';
+    const lastname = user ? user.lastname : '';
+
+    const handleLogout = async () => {
+        try {
+            await authController.logout();
+            history.replace('/login')
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return (
         <StyledWrapper>
             <div className="title">
@@ -39,7 +58,7 @@ const Topbar = () => {
                 </Link>
             </div>
             <div className="menu">
-                <p>Tanakorn Karode</p>
+                <p>{firstname} {lastname}</p>
                 <Link to='/add-word'>
                     <p>Add Word</p>
                 </Link>
@@ -47,10 +66,9 @@ const Topbar = () => {
                     <p>Quiz</p>
                 </Link>
                 <p>History</p>
+                <p onClick={handleLogout}>Logout</p>
             </div>
-
         </StyledWrapper>
-
     )
 }
 
