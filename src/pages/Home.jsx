@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Topbar from '../components/topbar'
 
 const Home = () => {
     return (
         <div>
-            <h1>Home Page</h1>
+            <Topbar/>
             <Link to='/login'>Logout</Link>
         </div>
     )
