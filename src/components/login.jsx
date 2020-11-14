@@ -15,9 +15,9 @@ const StyledWrapper = styled.div`
         width: 40vw;
         height: 50vh;
         border-style: ridge;
-    }
-    .text{
-        margin-left: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .input{
         width: 90%;
@@ -49,9 +49,9 @@ const LogIn = () => {
         <StyledWrapper>
             <div className="container">
                 <div className="text">
-                    <label>Email</label>
+                    <p>Email</p>
                     <input type="email" onChange={e => setEmail(e.target.value)} className="input"></input>
-                    <label>Password</label>
+                    <p>Password</p>
                     <input type="password" onChange={e => setPassword(e.target.value)} className="input"></input>
                     <div className="bnt">
                         <Link to='/home'>
