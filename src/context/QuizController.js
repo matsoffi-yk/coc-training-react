@@ -12,17 +12,20 @@ const QuizController = (authController) => {
     useEffect(() => {
         if (credential) {
             const unsub = col.onSnapshot((snapshot) => {
-                snapshot.docs.forEach((doc) => {
-                    const dataObj = doc.data();
-                    const data = {
-                        ...dataObj,
-                        id: doc.id,
-                        createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
-                    }
-                    if (!quizObj) quizObj = {};
-                    quizObj[doc.id] = data;
-                });
-                setQuizObj({ ...quizObj });
+                setQuizObj(quizObj => {
+                    quizObj = null;
+                    snapshot.docs.forEach((doc) => {
+                        const dataObj = doc.data();
+                        const data = {
+                            ...dataObj,
+                            id: doc.id,
+                            createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
+                        }
+                        if (!quizObj) quizObj = {};
+                        quizObj[doc.id] = data;
+                    });
+                    return { ...quizObj }
+                })
             });
             return () => unsub();
         }

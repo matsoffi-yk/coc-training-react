@@ -12,6 +12,7 @@ const VocabController = (authController) => {
         if (credential) {
             const unsub = col.onSnapshot((snapshot) => {
                 setVocabObj(vocabObj => {
+                    vocabObj = null;
                     snapshot.docs.forEach((doc) => {
                         const dataObj = doc.data();
                         const data = {
