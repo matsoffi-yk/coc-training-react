@@ -7,7 +7,7 @@ const QuizController = (authController) => {
     const { credential } = authController;
     let [quizObj, setQuizObj] = useState(null);
 
-    const col = credential ? firebase.firestore().collection(`/users/${credential.uid}/quizes`) : null;
+    const col = credential ? firebase.firestore().collection(`/users/${credential.user.uid}/quizes`) : null;
 
     useEffect(() => {
         if (credential) {
