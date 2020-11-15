@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppContext } from '../context/AppProvider';
 import { Button, notification, Space } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
+import _ from 'lodash';
 
 const StyledWrapper = styled.div`
     padding: 10px 20%;
@@ -44,6 +45,7 @@ const Quiz = () => {
 
     const [selected, setSelected] = useState(-1);
     const [loading, setLoading] = useState(false);
+    const [shuffledChoices, setSuffleChoices] = useState([]);
 
     const id = params.id;
     const page = params.page;
@@ -53,10 +55,15 @@ const Quiz = () => {
     const word = words[page - 1];
     const choices = quiz ? quiz[`choice_${word}`] : [];
 
+    useEffect(() => {
+        const choiceWithIndex = choices.map((choice, index) => ({ meanings: choice, index }))
+        setSuffleChoices(_.shuffle(choiceWithIndex));
+    }, [id, page, quiz]);
+
     const handleAnswer = async () => {
         setLoading(true);
         try {
-            await quizController.answerQuiz(id, page, selected);
+            await quizController.answerQuiz(id, page, shuffledChoices[selected].index);
             if (page < words.length) {
                 history.push(`/quiz/${id}/${+page + 1}`)
             } else {
@@ -76,13 +83,13 @@ const Quiz = () => {
             <h1>{page}. {word} แปลว่าอะไร ?</h1>
             <div>
                 {
-                    choices.map((choice, index) => (
+                    shuffledChoices.map((choice, index) => (
                         <div
                             key={index}
                             className={`choice-card ${selected === index ? 'selected' : ''}`}
                             onClick={() => setSelected(index)}
                         >
-                            {index + 1}. {choice}
+                            {index + 1}. {choice.meanings}
                         </div>
                     ))
                 }
