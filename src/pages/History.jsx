@@ -18,9 +18,6 @@ const History = () => {
     const { quizController } = useContext(AppContext)
     const { quizs } = quizController
 
-    // quizs && console.log(quizs);    
-    quizs && quizs.map(index => (console.log(index.createdAt)))
-
     return (
         <StyledWrapper>
             <h1>ประวัติ</h1>
@@ -34,7 +31,7 @@ const History = () => {
                         })}
                             <span> {quiz.createdAt.toLocaleTimeString()}</span>
                         </p>
-                        <p>คะแนน</p>
+                        <p>คะแนน {quiz.score ? quiz.score : 0}</p>
                     </div>
                 ))
             }

@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={() => (
-                credential ? <Component/> : (<Redirect to='/login' />)
+                credential ? <Component /> : (<Redirect to='/login' />)
             )}
         />
     )

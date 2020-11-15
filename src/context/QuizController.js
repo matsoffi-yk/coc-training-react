@@ -7,8 +7,6 @@ const QuizController = () => {
 
     let [quizObj, setQuizObj] = useState(null);
 
-    // console.log(quizObj);
-
     useEffect(() => {
 
         col.onSnapshot((snapshot) => {
@@ -38,6 +36,7 @@ const QuizController = () => {
             const mil = createdAt.getMilliseconds();
             const id = `${y}-${m}-${d}-${hr}-${min}-${sec}-${mil}`;
             await col.doc(id).set({ ...data, createdAt: new Date() });
+            console.log(id);
             return id;
         } catch (e) {
             throw e;

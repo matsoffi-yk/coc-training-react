@@ -60,11 +60,11 @@ const CreateQuiz = () => {
                 month: 'long',
                 day: 'numeric',
             })
+            
             prev[dateFormat] = '';
         }
         return prev;
     }, {});
-
     const dates = Object.keys(dateObj).map(d => ({ label: d, value: d }));
 
     const remainVocabs = !vocabs ? [] : vocabs.filter((vocab) => {
@@ -112,7 +112,6 @@ const CreateQuiz = () => {
     }
 
     const createChoices = (word) => {
-        console.log(vocabObj[word])
         const choices = [vocabObj[word].meanings.join(', ')];
         const source = [...vocabs];
 
@@ -132,7 +131,8 @@ const CreateQuiz = () => {
         try {
             const words = pickWords();
 
-            console.log(words);
+            if (words.length <= 0)
+                throw new Error('No words')
 
             const choicesList = {};
 
@@ -140,9 +140,9 @@ const CreateQuiz = () => {
                 choicesList[`choice_${word}`] = createChoices(word);
             });
 
-            const res = await createQuiz({ ...quiz, words, ...choicesList });
+            const id = await createQuiz({ ...quiz, words, ...choicesList });
 
-            history.push(`/quiz/${res.id}/1`);
+            history.push(`/quiz/${id}/1`);
         } catch (e) {
             console.log(e);
             notification['error']({
