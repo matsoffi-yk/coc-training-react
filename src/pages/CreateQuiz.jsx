@@ -60,11 +60,11 @@ const CreateQuiz = () => {
                 month: 'long',
                 day: 'numeric',
             })
+            
             prev[dateFormat] = '';
         }
         return prev;
     }, {});
-
     const dates = Object.keys(dateObj).map(d => ({ label: d, value: d }));
 
     const remainVocabs = !vocabs ? [] : vocabs.filter((vocab) => {
