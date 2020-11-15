@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react'
 import firebase from '../firebase';
 
-const col = firebase.firestore().collection('quizes');
 
-const QuizController = () => {
+const QuizController = (authController) => {
 
+    const { credential } = authController;
     let [quizObj, setQuizObj] = useState(null);
 
-    useEffect(() => {
-        col.onSnapshot((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                const dataObj = doc.data();
-                const data = {
-                    ...dataObj,
-                    id: doc.id,
-                    createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
-                }
-                if (!quizObj) quizObj = {};
-                quizObj[doc.id] = data;
-            });
-            setQuizObj({ ...quizObj });
-        });
+    const col = credential ? firebase.firestore().collection(`/users/${credential.uid}/quizes`) : null;
 
-    }, []);
+    useEffect(() => {
+        if (credential) {
+            const unsub = col.onSnapshot((snapshot) => {
+                snapshot.docs.forEach((doc) => {
+                    const dataObj = doc.data();
+                    const data = {
+                        ...dataObj,
+                        id: doc.id,
+                        createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
+                    }
+                    if (!quizObj) quizObj = {};
+                    quizObj[doc.id] = data;
+                });
+                setQuizObj({ ...quizObj });
+            });
+            return () => unsub();
+        }
+    }, [credential]);
 
     const createQuiz = async (data) => {
         try {

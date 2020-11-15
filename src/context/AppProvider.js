@@ -7,8 +7,8 @@ export const AppContext = React.createContext(null);
 
 const AppProvider = (props) => {
     const authController = AuthController();
-    const vocabController = VocabController();
-    const quizController = QuizController();
+    const vocabController = VocabController(authController);
+    const quizController = QuizController(authController);
 
     const value = {
         authController,

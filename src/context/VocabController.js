@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react'
 import firebase from '../firebase';
 
-const col = firebase.firestore().collection('vocabs');
+const VocabController = (authController) => {
 
-const VocabController = () => {
-
+    const { credential } = authController;
     let [vocabObj, setVocabObj] = useState(null);
 
+    const col = credential ? firebase.firestore().collection(`/users/${credential.uid}/vocabs`) : null;
+
     useEffect(() => {
-
-        col.onSnapshot((snapshot) => {
-            setVocabObj(vocabObj => {
-                snapshot.docs.forEach((doc) => {
-                    const dataObj = doc.data();
-                    const data = {
-                        ...dataObj,
-                        createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
-                    }
-                    if (!vocabObj) vocabObj = {};
-                    vocabObj[doc.id] = data;
-                });
-                return { ...vocabObj };
-            })
-        });
-
-    }, []);
+        if (credential) {
+            const unsub = col.onSnapshot((snapshot) => {
+                setVocabObj(vocabObj => {
+                    snapshot.docs.forEach((doc) => {
+                        const dataObj = doc.data();
+                        const data = {
+                            ...dataObj,
+                            createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
+                        }
+                        if (!vocabObj) vocabObj = {};
+                        vocabObj[doc.id] = data;
+                    });
+                    return { ...vocabObj };
+                })
+            });
+            return () => unsub()
+        }
+    }, [credential]);
 
     const addVocab = (vocab) => {
         return col.doc(vocab.word.trim()).set({
