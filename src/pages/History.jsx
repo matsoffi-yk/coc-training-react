@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { AppContext } from '../context/AppProvider'
 
@@ -23,16 +24,18 @@ const History = () => {
             <h1>ประวัติ</h1>
             {
                 quizs && quizs.map((quiz, index) => (
-                    <div key={index} className="history-card">
-                        <p>วันที่ {quiz.createdAt.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                        })}
-                            <span> {quiz.createdAt.toLocaleTimeString()}</span>
-                        </p>
-                        <p>คะแนน {quiz.score ? quiz.score : 0}</p>
-                    </div>
+                    <Link to={`/quiz/${quiz.id}/result`}>
+                        <div key={index} className="history-card">
+                            <p>วันที่ {quiz.createdAt.toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
+                                <span> {quiz.createdAt.toLocaleTimeString()}</span>
+                            </p>
+                            <p>คะแนน {quiz.score ? quiz.score : 0}</p>
+                        </div>
+                    </Link>
                 ))
             }
 

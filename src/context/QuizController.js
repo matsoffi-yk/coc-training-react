@@ -13,6 +13,7 @@ const QuizController = () => {
                 const dataObj = doc.data();
                 const data = {
                     ...dataObj,
+                    id: doc.id,
                     createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
                 }
                 if (!quizObj) quizObj = {};
