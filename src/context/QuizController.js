@@ -8,7 +8,6 @@ const QuizController = () => {
     let [quizObj, setQuizObj] = useState(null);
 
     useEffect(() => {
-
         col.onSnapshot((snapshot) => {
             snapshot.docs.forEach((doc) => {
                 const dataObj = doc.data();
