@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Topbar from '../components/topbar';
+import Topbar from '../components/Topbar';
 import AddWord from './AddWord';
 import Home from './Home';
 import CreateQuiz from './CreateQuiz';
