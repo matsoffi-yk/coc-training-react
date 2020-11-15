@@ -6,7 +6,7 @@ const VocabController = (authController) => {
     const { credential } = authController;
     let [vocabObj, setVocabObj] = useState(null);
 
-    const col = credential ? firebase.firestore().collection(`/users/${credential.uid}/vocabs`) : null;
+    const col = credential ? firebase.firestore().collection(`/users/${credential.user.uid}/vocabs`) : null;
 
     useEffect(() => {
         if (credential) {
