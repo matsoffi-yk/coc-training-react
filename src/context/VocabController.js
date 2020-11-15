@@ -25,7 +25,7 @@ const VocabController = () => {
     }, []);
 
     const addVocab = (vocab) => {
-        return col.doc(vocab.word).set({
+        return col.doc(vocab.word.trim()).set({
             word: vocab.word.trim(),
             types: vocab.types,
             meanings: vocab.meanings.map(m => m.trim()),

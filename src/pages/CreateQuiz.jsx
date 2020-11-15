@@ -9,7 +9,7 @@ const StyledWrapper = styled.div`
     padding: 10px 20%;
 
     @media(max-width: 768px) {
-        padding: 0;
+        padding: 10px 10%;
     }
 
     .form-item {
@@ -86,7 +86,10 @@ const CreateQuiz = () => {
     useEffect(() => {
         if (remainVocabs.length < quiz.wordCount) {
             setQuiz({ ...quiz, wordCount: remainVocabs.length })
-        }
+        } 
+        // else {
+        //     setQuiz({ ...quiz, wordCount: remainVocabs.length })
+        // }
     }, [remainVocabs]);
 
     const handleChangeDates = (values) => {
@@ -112,6 +115,9 @@ const CreateQuiz = () => {
     }
 
     const createChoices = (word) => {
+        console.log('word', word);
+        console.log(vocabObj[word])
+        console.log(vocabObj)
         const choices = [vocabObj[word].meanings.join(', ')];
         const source = [...vocabs];
 

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom'
 import { AppContext } from '../context/AppProvider';
 import { Form, Input, Button, notification } from 'antd';
+import bg from '../assets/english-time.jpg';
+
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -10,11 +12,15 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('${bg}');
+    background-size: cover;
 
     .container{
-        width: 50vw;
+        width: 100%;
+        max-width: 600px;
         border-radius: 8px;
         box-shadow: 0 0 6px 0 rgba(0,0,0,.15);
+        background-color: rgba(255,255,255,0.95);
         padding: 20px;
     }
 
