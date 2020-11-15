@@ -6,6 +6,7 @@ import Home from './Home';
 import CreateQuiz from './CreateQuiz';
 import Quiz from './Quiz';
 import QuizResult from './QuizResult';
+import History from './History';
 
 const Main = () => {
     return (
@@ -16,6 +17,7 @@ const Main = () => {
                 <Route path='/quiz/:id/:page' component={Quiz} />
                 <Route path='/add-word' component={AddWord} />
                 <Route path='/quiz' component={CreateQuiz} />
+                <Route path='/history' component={History} />
                 <Route path='/' component={Home} />
             </Switch>
         </div>

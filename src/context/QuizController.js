@@ -7,7 +7,7 @@ const QuizController = () => {
 
     let [quizObj, setQuizObj] = useState(null);
 
-    console.log(quizObj);
+    // console.log(quizObj);
 
     useEffect(() => {
 

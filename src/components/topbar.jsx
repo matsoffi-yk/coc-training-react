@@ -65,7 +65,9 @@ const Topbar = () => {
                 <Link to='/quiz'>
                     <p>Quiz</p>
                 </Link>
-                <p>History</p>
+                <Link to='/history'>
+                    <p>History</p>  
+                </Link>
                 <p onClick={handleLogout}>Logout</p>
             </div>
         </StyledWrapper>
