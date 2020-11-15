@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AuthController from './AuthController';
+import QuizController from './QuizController';
 import VocabController from './VocabController';
 
 export const AppContext = React.createContext(null);
@@ -7,10 +8,12 @@ export const AppContext = React.createContext(null);
 const AppProvider = (props) => {
     const authController = AuthController();
     const vocabController = VocabController();
+    const quizController = QuizController();
 
     const value = {
         authController,
-        vocabController
+        vocabController,
+        quizController
     }
 
     return (

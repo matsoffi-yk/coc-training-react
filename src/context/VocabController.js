@@ -12,8 +12,12 @@ const VocabController = () => {
         col.onSnapshot((snapshot) => {
             snapshot.docs.forEach((doc) => {
                 const dataObj = doc.data();
+                const data = {
+                    ...dataObj,
+                    createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
+                }
                 if (!vocabObj) vocabObj = {};
-                vocabObj[doc.id] = dataObj;
+                vocabObj[doc.id] = data;
             });
             setVocabObj({ ...vocabObj });
         });
@@ -21,17 +25,24 @@ const VocabController = () => {
     }, []);
 
     const addVocab = (vocab) => {
-        console.log(vocab);
-        if (vocabObj && vocabObj[vocab.word])
-            throw new Error('Word existed')
-        else
-            return col.doc(vocab.word).set({ ...vocab, createdAt: new Date() });
+        return col.doc(vocab.word).set({
+            word: vocab.word.trim(),
+            types: vocab.types,
+            meanings: vocab.meanings.map(m => m.trim()),
+            createdAt: new Date()
+        });
+    }
+
+    const deleteVocab = (word) => {
+        delete vocabObj[word]
+        return col.doc(word).delete();
     }
 
     return {
         vocabObj,
         vocabs: vocabObj ? Object.values(vocabObj) : null,
-        addVocab
+        addVocab,
+        deleteVocab
     }
 
 }

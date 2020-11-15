@@ -11,8 +11,6 @@ const AuthController = () => {
     const [credential, setCredential] = useState(localCredential ? JSON.parse(localCredential) : null);
     const [user, setUser] = useState(null);
 
-    console.log(user);
-
     useEffect(() => {
         if (credential) {
             const unsub = col.doc(credential.user.uid).onSnapshot(snapshot => {

@@ -57,7 +57,6 @@ const Register = () => {
     const onFinish = async values => {
         setLoading(true);
         delete values['confirm'];
-        console.log('Received values of form: ', values);
         const { email, password, ...data } = values;
         try {
             await authController.register(email, password, data)

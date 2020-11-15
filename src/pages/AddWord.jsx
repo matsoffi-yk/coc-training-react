@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Input, Form, Select, Space, Button, notification } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons'
 import { AppContext } from '../context/AppProvider';
+import { wordTypes } from '../common/labels';
 
 const StyledWrapper = styled.div`
     padding: 10px 20%;
@@ -33,15 +34,6 @@ const StyledWrapper = styled.div`
         width: 100%;
     }
 `;
-
-const types = [
-    { label: 'noun', value: 'noun' },
-    { label: 'verb', value: 'verb' },
-    { label: 'adjective', value: 'adjective' },
-    { label: 'adverb', value: 'adverb' },
-    { label: 'preposition', value: 'preposition' },
-    { label: 'interjection', value: 'interjection' }
-]
 
 const AddWord = () => {
 
@@ -105,7 +97,7 @@ const AddWord = () => {
                 <Select
                     id='type'
                     placeholder='Word type'
-                    options={types}
+                    options={wordTypes}
                     mode='multiple'
                     className='select'
                     value={vocab.types}
