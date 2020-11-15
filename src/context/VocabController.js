@@ -10,16 +10,18 @@ const VocabController = () => {
     useEffect(() => {
 
         col.onSnapshot((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                const dataObj = doc.data();
-                const data = {
-                    ...dataObj,
-                    createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
-                }
-                if (!vocabObj) vocabObj = {};
-                vocabObj[doc.id] = data;
-            });
-            setVocabObj({ ...vocabObj });
+            setVocabObj(vocabObj => {
+                snapshot.docs.forEach((doc) => {
+                    const dataObj = doc.data();
+                    const data = {
+                        ...dataObj,
+                        createdAt: dataObj.createdAt ? dataObj.createdAt.toDate() : null
+                    }
+                    if (!vocabObj) vocabObj = {};
+                    vocabObj[doc.id] = data;
+                });
+                return { ...vocabObj };
+            })
         });
 
     }, []);

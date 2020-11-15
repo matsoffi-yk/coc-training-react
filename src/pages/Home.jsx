@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
-import { Col, Select, Row, Input } from 'antd';
+import { Col, Select, Row, Input, Modal } from 'antd';
 import { AppContext } from '../context/AppProvider';
 import { wordTypes } from '../common/labels';
 import WordCard from '../components/WordCard';
@@ -87,6 +87,14 @@ const Home = () => {
         return Object.entries(list).sort((a, b) => a[0].localeCompare(b[0]));
     }
 
+    const handleDelete = (word) => {
+        Modal.confirm({
+            title: 'Delete word',
+            content: `Are you sure to delete the word "${word}"`,
+            onOk: () => vocabController.deleteVocab(word)
+        })
+    }
+
     let dataList = [];
 
     switch (displayType) {
@@ -132,7 +140,10 @@ const Home = () => {
                                     .sort((a, b) => a.word.localeCompare(b.word))
                                     .map((vocab, index) => (
                                         <Col xs={24} sm={24} md={12} lg={8} xl={6} key={index}>
-                                            <WordCard vocab={vocab} />
+                                            <WordCard 
+                                                vocab={vocab} 
+                                                onDelete={word => handleDelete(word)}
+                                            />
                                         </Col>
                                     ))}
                             </Row>
