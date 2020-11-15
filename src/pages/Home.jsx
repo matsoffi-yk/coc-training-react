@@ -1,6 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import Topbar from '../components/Topbar'
 import styled from 'styled-components';
 import { Col, Select, Row, Input } from 'antd';
 import { AppContext } from '../context/AppProvider';
@@ -21,9 +19,15 @@ const StyledWrapper = styled.div`
         justify-content: space-between;
     }
 
+    .select {
+        min-width: 200px;
+        max-width: 300px;
+    }
+
     .search {
         margin-bottom: 10px;
-        width: 300px;
+        min-width: 200px;
+        max-width: 300px;
     }
 
 
@@ -99,7 +103,7 @@ const Home = () => {
                     <div>
                         <Select
                             defaultValue="date"
-                            style={{ width: 120 }}
+                            className='select'
                             value={displayType}
                             onChange={value => setDisplayType(value)}
                         >
@@ -134,9 +138,7 @@ const Home = () => {
                             </Row>
                         </div>
                     ))}
-
             </div>
-
         </StyledWrapper>
     )
 }

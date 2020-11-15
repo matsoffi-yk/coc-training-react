@@ -5,13 +5,17 @@ import { AppContext } from '../context/AppProvider'
 import { Input, Form, Checkbox, Button, notification } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-const StyledWrapper = styled.div`
+import bg from '../assets/english-time.jpg';
 
+const StyledWrapper = styled.div`
     height: 100vh;
-    width: 100vw;
+    width: 100%auto;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-image: url('${bg}');
+    /* background-size: cover; */
 
     .container{
         height: 50vh;
@@ -20,8 +24,10 @@ const StyledWrapper = styled.div`
         justify-content: center;
         flex-direction: column;
         border-radius: 8px;
-        border: 1px solid #cecece;
-        min-width: 500px;
+        max-width: 500px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.95);
+        box-shadow: 0 0 18px 0 rgba(0,0,0,.15);
     }
 
     .header {

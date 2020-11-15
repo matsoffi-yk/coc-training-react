@@ -1,16 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../context/AppProvider'
 import styled from 'styled-components';
 import { Button, Space } from 'antd';
-import { Link, useHistory, useParams } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
     
     padding: 10px 20%;
 
     @media(max-width: 768px) {
-        padding: 0;
+        padding: 10px 10%;
     }
 
     .top {
@@ -46,23 +45,24 @@ const StyledWrapper = styled.div`
 
 const QuizResult = () => {
 
-    const history = useHistory();
     const params = useParams();
 
     const { quizController } = useContext(AppContext);
-    const { quizObj } = quizController;
-
-    const [selected, setSelected] = useState(-1);
-    const [loading, setLoading] = useState(false);
+    const { quizObj, evaluateQuiz } = quizController;
 
     const id = params.id;
-    const page = params.page;
 
     const quiz = quizObj ? quizObj[id] : null;
     const words = quiz ? quiz.words : [];
     const answers = !quiz ? [] : words.map((word) => quiz[`answer_${word}`]);
 
     const score = answers.reduce((prev, cur) => cur === 0 ? prev + 1 : prev, 0);
+
+    useEffect(() => {
+        if (score >= 0) {
+            evaluateQuiz(id, score);
+        }
+    }, [id]);
 
     return (
         <StyledWrapper>
@@ -91,7 +91,6 @@ const QuizResult = () => {
                                         <div
                                             key={j}
                                             className={`choice-card ${j === 0 ? 'selected' : 'wrong'}`}
-                                            onClick={() => setSelected(j)}
                                         >
                                             {choice}
                                         </div>

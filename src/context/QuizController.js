@@ -51,11 +51,18 @@ const QuizController = () => {
         return col.doc(id).set({ ...quiz, [`answer_${word}`]: answer });
     }
 
+    const evaluateQuiz = async (id, score) => {
+        const quiz = quizObj[id];
+        if (!quiz) throw new Error('Quiz not found');
+        return col.doc(id).set({ ...quiz, score });
+    }
+
     return {
         quizObj,
         quizs: quizObj ? Object.values(quizObj) : null,
         createQuiz,
-        answerQuiz
+        answerQuiz,
+        evaluateQuiz
     }
 
 }

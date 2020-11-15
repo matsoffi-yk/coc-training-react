@@ -10,7 +10,7 @@ const StyledWrapper = styled.div`
     padding: 10px 20%;
 
     @media(max-width: 768px) {
-        padding: 0;
+        padding: 10px 10%;
     }
 
     .choice-card {
