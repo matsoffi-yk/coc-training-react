@@ -75,10 +75,6 @@ const Topbar = () => {
                 <Link to='/'>
                     <h2 className='logo'>Keep it!</h2>
                 </Link>
-                <Link to='/history'>
-                    <p>History</p>  
-                </Link>
-                <p onClick={handleLogout}>Logout</p>
             </div>
             {
                 (breakpoints.md) ? (
@@ -90,42 +86,43 @@ const Topbar = () => {
                         <Link to='/quiz'>
                             <p>Quiz</p>
                         </Link>
-                        <p>History</p>
+                        <Link to='/history'>
+                            <p>History</p>
+                        </Link>
                         <p onClick={handleLogout}>Logout</p>
                     </div >
-                ) : (
-                        <Popover
-                            placement="bottomRight"
-                            content={
-                                <Menu
-                                    style={{ width: 256 }}
-                                    selectedKeys={[selected]}
-                                    mode="inline"
-                                >
-                                    <Menu.Item key="">
-                                        <Link to='/'>Home</Link>
-                                    </Menu.Item>
-                                    <Menu.Item key="add-word">
-                                        <Link to='/add-word'>Add word</Link>
-                                    </Menu.Item>
-                                    <Menu.Item key="quiz">
-                                        <Link to='/quiz'>Quiz</Link>
-                                    </Menu.Item>
-                                    <Menu.Item key="history">
-                                        <Link to='/quiz'>History</Link>
-                                    </Menu.Item>
-                                    <Menu.Item key="name">
-                                        {firstname} {lastname}
-                                    </Menu.Item>
-                                    <Menu.Item key="logout" onClick={handleLogout}>
-                                        Logout
-                                    </Menu.Item>
-                                </Menu>
-                            }
-                            trigger="click"
+                ) : (<Popover
+                    placement="bottomRight"
+                    content={
+                        <Menu
+                            style={{ width: 256 }}
+                            selectedKeys={[selected]}
+                            mode="inline"
                         >
-                            <MenuOutlined className='icon' />
-                        </Popover>
+                            <Menu.Item key="">
+                                <Link to='/'>Home</Link>
+                            </Menu.Item>
+                            <Menu.Item key="add-word">
+                                <Link to='/add-word'>Add word</Link>
+                            </Menu.Item>
+                            <Menu.Item key="quiz">
+                                <Link to='/quiz'>Quiz</Link>
+                            </Menu.Item>
+                            <Menu.Item key="history">
+                                <Link to='/history'>History</Link>
+                            </Menu.Item>
+                            <Menu.Item key="name">
+                                {firstname} {lastname}
+                            </Menu.Item>
+                            <Menu.Item key="logout" onClick={handleLogout}>
+                                Logout
+                            </Menu.Item>
+                        </Menu>
+                    }
+                    trigger="click"
+                >
+                    <MenuOutlined className='icon' />
+                </Popover>
                     )
             }
         </StyledWrapper >
