@@ -91,7 +91,8 @@ const Home = () => {
         Modal.confirm({
             title: 'Delete word',
             content: `Are you sure to delete the word "${word}"`,
-            onOk: () => vocabController.deleteVocab(word)
+            onOk: () => vocabController.deleteVocab(word),
+            onCancel: () => {}
         })
     }
 
